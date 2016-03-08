@@ -1,0 +1,59 @@
+body{ margin:0px; padding:0px;}
+/*.all{ width:1500px;}*/
+#dragleft{min-width:1225px; border:1px solid #CCC;}
+#dragright{min-width:1225px;border:1px solid #ccc;height:150px;}
+#dragleft ul ul{position:relative; border:1px solid #ccc;display:block; width:1200px; height:200px;}
+
+/*这个地方要小心，li和.selected要连在一起，不然表示下级。查找不到*/
+#dragleft li.selected{background:#FFC;}
+.clone{position: absolute; border:1px solid #666; background-color:#CCCCCC;}
+.id222{ border:3px solid #F00;}
+
+.over{ border:1px solid #666;}
+
+
+.savadiv{ width:100%;
+float:left; margin-top:30px;}
+#sava{ width:70px; height:30px; border:1px solid #CCC; background:#CCC; font-size:14px; line-height:26px;}
+
+/*block的宽度高度其实是控制拖动不要超出范围的*/
+.block{
+	display:block; width:50px; height:50px;position:absolute;}
+
+.lih3{
+	width:20px;
+	height:20px;	
+	}
+.dragdhk{position: absolute;border-radius: 4px;}
+/*背景图*/
+#location_list .submenu,#location_preview_list .submenu{margin-left:-10px;}
+/*#ul1{ background-image:url(../images/floor_002.jpg); background-size:100% 100%;}*/
+
+/**拖动后限制层面上图标大小**/
+#location_list .submenu li,#location_preview_list .submenu li{ display:block;float:left;text-aling:center; width:50px; height:50px;top:20px;left:20px;}
+#location_list .submenu li div,#location_preview_list .submenu li div{text-align:center;width:100%;height:50px;}
+#location_list .submenu li .drag img,#location_preview_list .submenu li .drag img{ width:50px; height:50px;}
+
+#dragright li{ position:relative; display:block;float:left;text-aling:center; width:50px; height:50px;top:20px;left:20px;}
+#dragright h4{display: block;
+    float: left;
+    height: 25px;
+    left: -30px;
+    line-height: 25px;
+    position: relative;
+    text-align: center;
+    top: 60px;
+    text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap; 
+    width: 50px;font-size:14px;}
+#dragright li div{text-align:center;width:100%;height:50px;}
+#dragright li .drag img{ width:50px; height:50px;}
+/*
+#ul1{ background-image:url(../images/deck_2.png); background-size:100% 100%;}
+#ul2{ background-image:url(../images/deck_3.png); background-size:100% 100%;}
+#ul3{ background-image:url(../images/deck_4.png); background-size:100% 100%;}
+#ul4{ background-image:url(../images/deck_5.png); background-size:100% 100%;}
+#ul5{ background-image:url(../images/deck_6.png); background-size:100% 100%;}
+#ul6{ background-image:url(../images/deck_7.png); background-size:100% 100%;}
+*/

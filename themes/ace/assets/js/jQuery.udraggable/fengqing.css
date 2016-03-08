@@ -1,0 +1,48 @@
+.mmimg1,.mmimg2,.mmimg3,.mmimg4,.mmimg5,.mmimg6,.mmimg7,.mmimg8{display:block;
+width:1200px;
+cursor:pointer;}
+
+.mmimg1{
+	background:url(../../images/1.png) 0px 0px no-repeat;
+	height:94px;}
+.mmimg7{
+	background:url(../../images/1.png) 0px -94px  no-repeat;
+	height:19px;}
+.mmimg6{
+	background:url(../../images/1.png) 0px  -112px no-repeat;
+	height:24px;}
+.mmimg5{
+	background:url(../../images/1.png) 0px -135px  no-repeat;
+	height:19px;}
+.mmimg4{
+	background:url(../../images/1.png) 0px -153px  no-repeat;
+	height:20px;}
+.mmimg3{
+	background:url(../../images/1.png) 0px -172px  no-repeat;
+	height:19px;}
+.mmimg2{
+	background:url(../../images/1.png) 0px -190px  no-repeat;
+	height:19px;}
+.mmimg8{
+	background:url(../../images/1.png) 0px -208px  no-repeat;
+	height:75px;}
+
+
+.mmimg7:hover{
+	background:url(../../images/2.png) 0px 0px  no-repeat;
+	height:19px;}
+.mmimg6:hover{
+	background:url(../../images/2.png) 0px  -18px no-repeat;
+	height:24px;}
+.mmimg5:hover{
+	background:url(../../images/2.png) 0px -41px  no-repeat;
+	height:19px;}
+.mmimg4:hover{
+	background:url(../../images/2.png) 0px -59px  no-repeat;
+	height:20px;}
+.mmimg3:hover{
+	background:url(../../images/2.png) 0px -78px  no-repeat;
+	height:19px;}
+.mmimg2:hover{
+	background:url(../../images/2.png) 0px -96px  no-repeat;
+	height:19px;}
