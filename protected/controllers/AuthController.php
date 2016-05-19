@@ -31,12 +31,9 @@ class AuthController extends Controller
         $password = md5($_POST['password']);
         $sql = "SELECT * FROM vcos_admin WHERE admin_password = '{$password}' AND admin_id = '{$_POST['id']}'";
         $name = Yii::app()->m_db->createCommand($sql)->queryAll();
-        if($name)
-        {
+        if($name){
             echo "false";
-        }
-        else
-        {
+        }else{
             echo "true";
         }
     }

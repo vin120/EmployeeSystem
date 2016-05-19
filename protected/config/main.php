@@ -29,7 +29,7 @@ return array(
 		
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
+			'password'=>'123456',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
@@ -66,7 +66,8 @@ return array(
 		
 
 		// database settings are configured in database.php
-		'm_db'=>require(dirname(__FILE__).'/m_db.php'),
+		'db'=>require(dirname(__FILE__).'/db.php'),		//gii only recognise 'db',not 'm_db'
+		'm_db'=>require(dirname(__FILE__).'/db.php'),
 		// 'm_db'=>require(dirname(__FILE__).'/m_db.php'),
 
 		'errorHandler'=>array(
@@ -85,6 +86,10 @@ return array(
 				/*
 				array(
 					'class'=>'CWebLogRoute',
+					'levels'=>'trace',
+					'categories'=>'system.db.*',
+					'showInFireBug'=>true,
+					'levels'=>'trace,info,error,warning,xdebug',
 				),
 				*/
 			),

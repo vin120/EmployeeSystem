@@ -49,24 +49,74 @@ DataSourceTree.prototype.data = function(options, callback) {
             }
         }
     }
-    var tree_data;
-    myAjax.post('menu_permissionajax', 'pid=0' , function (data) {
-        if (data){
-            obj= $.parseJSON(data);
-            var a='';
-            $.each(obj, function(i,item){
-                a += "'"+item['role_name']+"' : {name:'"+item['role_name']+"', type:'folder', id:'"+item['menu_id']+"'},";
-            });
-            tree_data = '{'+a+'}';
-        }
-    });
-    alert(tree_data);
-    var treeDataSource = new DataSourceTree({data: tree_data});
+//    var tree_data;
+//    myAjax.post('check_ajax', 'pid=0' , function (data) {
+//        if (data){
+//            obj= $.parseJSON(data);
+//            var a='';
+//            $.each(obj, function(i,item){
+//                a += "'"+item['role_name']+"' : {name:'"+item['role_name']+"', type:'folder', id:'"+item['menu_id']+"'},";
+//            });
+//            tree_data = '{'+a+'}';
+//        }
+//    });
+//    alert(tree_data);
+//    var treeDataSource = new DataSourceTree({data: tree_data});
+    
+    
+    
+    
 //    var a='';
 //    $.each(obj, function(i,item){
 //        a += "'"+item['role_name']+"' : {name:'"+item['role_name']+"', type:'folder', id:'"+item['menu_id']+"'},";
 //    });
 //    var tree_data = a;
+    
+//--------------------------------------------------------------------------------------------------------------------
+    
+
+    var tree_data = {
+    	'taishan' : {name: '泰山号', type: 'folder'}	,
+    	'haina' : {name: '海娜号', type: 'folder'}	,
+    	'dongfang' : {name: '东方神龙号', type: 'folder'}	,
+    
+    }
+    tree_data['taishan']['additionalParameters'] = {
+    	'children' : {
+    		'appliances' : {name: '水手部', type: 'item'},
+    		'arts-crafts' : {name: '加班部', type: 'item'},
+    		'clothing' : {name: 'Clothing', type: 'item'},
+    		'computers' : {name: 'Computers', type: 'item'},
+    		'jewelry' : {name: 'Jewelry', type: 'item'},
+    		'office-business' : {name: 'Office & Business', type: 'item'},
+    		'sports-fitness' : {name: 'Sports & Fitness', type: 'item'}
+    	}
+    }
+    tree_data['haina']['additionalParameters'] = {
+    	'children' : {
+    		'cars' : {name: 'Cars', type: 'folder'},
+    		'motorcycles' : {name: 'Motorcycles', type: 'item'},
+    		'boats' : {name: 'Boats', type: 'item'}
+    	}
+    }
+    tree_data['haina']['additionalParameters']['children']['cars']['additionalParameters'] = {
+    	'children' : {
+    		'classics' : {name: 'Classics', type: 'item'},
+    		'convertibles' : {name: 'Convertibles', type: 'item'},
+    		'coupes' : {name: 'Coupes', type: 'item'},
+    		'hatchbacks' : {name: 'Hatchbacks', type: 'item'},
+    		'hybrids' : {name: 'Hybrids', type: 'item'},
+    		'suvs' : {name: 'SUVs', type: 'item'},
+    		'sedans' : {name: 'Sedans', type: 'item'},
+    		'trucks' : {name: 'Trucks', type: 'item'}
+    	}
+    }
+
+ 
+
+    var treeDataSource = new DataSourceTree({data: tree_data});
+    
+
 //tree_data['for-sale']['additionalParameters'] = {
 //	'children' : {
 //		'appliances' : {name: 'Appliances', type: 'item'},

@@ -757,6 +757,18 @@ return array (
     '排序'=>'sequence',
     '原图片'=>'Original picture',
     '栏目名'=>'Column name',
+		
+	'一月'=>'January',
+	'二月'=>'Febrary',
+	'三月'=>'March',
+		
+	'上一月'=>'prev',
+	'下一月'=>'next',
+	'本月'=>'today',
+		
+	'周日'=>'Sun',
+	'周一'=>'Mon',
+	'周二'=>'Tue',
     );
     
 
