@@ -1,53 +1,42 @@
 <?php
 header ( "content-type:text/html;charset=utf8" );
 class SalaryController extends Controller {
-
-
+	
 	/*
-	 *数据注入过滤
-	 */public function  mytrim()
-   {
-   	
-   	   foreach ($_POST as $key => $value) {
-   	   	$_POST[$key]=trim($value);//去空格
-   	   	$_POST[$key]=htmlspecialchars($_POST[$key]);//专义html,js代码,防止前端代码注入
-   	   	$$_POST[$key]=addslashhes($_POST[$key]);//  过滤大部分的sql注入
-   	   	
-   	   }
-   	   
-   	   foreach ($_GET as $key => $value) {
-   	
-   	    $_GET[$key]=trim($value);//去空格
-   	   	$_GET[$key]=htmlspecialchars($_GET[$key]);//专义html,js代码,防止前端代码注入
-   	   	$_GET[$key]=addslashes($_GET[$key]);//  过滤大部分的sql注入
-   	   
-   	   }
-   	
-   }
-
-
-
-   /*
-	 *数据注入过滤
-	 */public function  jsontrim($data)
-     {
-   	
-   	   foreach ($_POST as $key => $value) {
-   	   	$_POST[$key]=trim($value);//去空格
-   	   	$_POST[$key]=htmlspecialchars($_POST[$key]);//专义html,js代码,防止前端代码注入
-   	   	$_POST[$key]=addslashes($_POST[$key]);//  过滤大部分的sql注入
-   	   	
-   	   }
-   	   
-   	   foreach ($_GET as $key => $value) {
-   	
-   	    $_GET[$key]=trim($value);//去空格
-   	   	$_GET[$key]=htmlspecialchars($_GET[$key]);//专义html,js代码,防止前端代码注入
-   	   	$_GET[$key]=addslashes($_GET[$key]);//  过滤大部分的sql注入
-   	   
-   	   }
-   	
-   }
+	 * 数据注入过滤
+	 */
+	public function mytrim() {
+		foreach ( $_POST as $key => $value ) {
+			$_POST [$key] = trim ( $value ); // 去空格
+			$_POST [$key] = htmlspecialchars ( $_POST [$key] ); // 专义html,js代码,防止前端代码注入
+			$$_POST [$key] = addslashhes ( $_POST [$key] ); // 过滤大部分的sql注入
+		}
+		
+		foreach ( $_GET as $key => $value ) {
+			
+			$_GET [$key] = trim ( $value ); // 去空格
+			$_GET [$key] = htmlspecialchars ( $_GET [$key] ); // 专义html,js代码,防止前端代码注入
+			$_GET [$key] = addslashes ( $_GET [$key] ); // 过滤大部分的sql注入
+		}
+	}
+	
+	/*
+	 * 数据注入过滤
+	 */
+	public function jsontrim($data) {
+		foreach ( $_POST as $key => $value ) {
+			$_POST [$key] = trim ( $value ); // 去空格
+			$_POST [$key] = htmlspecialchars ( $_POST [$key] ); // 专义html,js代码,防止前端代码注入
+			$_POST [$key] = addslashes ( $_POST [$key] ); // 过滤大部分的sql注入
+		}
+		
+		foreach ( $_GET as $key => $value ) {
+			
+			$_GET [$key] = trim ( $value ); // 去空格
+			$_GET [$key] = htmlspecialchars ( $_GET [$key] ); // 专义html,js代码,防止前端代码注入
+			$_GET [$key] = addslashes ( $_GET [$key] ); // 过滤大部分的sql注入
+		}
+	}
 	
 	/*
 	 * 获取部门名字
@@ -61,7 +50,6 @@ class SalaryController extends Controller {
 		$post = Yii::app ()->db->createCommand ( $sql )->queryAll ();
 		return $post;
 	}
-
 	public function get_gonzidate() {
 		$sql = "SELECT date FROM vcos_salary_pay";
 		$date = Yii::app ()->db->createCommand ( $sql )->queryAll ();
@@ -126,7 +114,7 @@ class SalaryController extends Controller {
 		echo $request;
 	}
 	public function actionSalary_Set() {
-		$this->mytrim();
+		$this->mytrim ();
 		$table_type = (isset ( $_GET ['table_type'] )) ? $_GET ['table_type'] : '1';
 		$department_id = '';
 		$post_id = '';
@@ -208,7 +196,7 @@ class SalaryController extends Controller {
 				$pager->pageSize = 2; // 每页多少条记录
 				$pager->applyLimit ( $criteria ); // 进行limit截取
 				$sql = "SELECT a.*,b.title_name ,c.post_cn_name" . $sql1 . $sql2 . $selectsql . " LIMIT {$criteria->offset}, $pager->pageSize";
-			
+				
 				// $sql = "SELECT * FROM vcos_title LIMIT {$criteria->offset}, $pager->pageSize";
 				$skill_allowance = Yii::app ()->m_db->createCommand ( $sql )->queryAll ();
 				foreach ( $skill_allowance as $key => $row ) {
@@ -320,7 +308,6 @@ class SalaryController extends Controller {
 					$housing_fund [$key] ['newdepartmentname'] = substr ( $this->getdepartmentname ( $name, $row ['department_id'] ), 1 );
 				}
 				
-				
 				break;
 			
 			case '6' :
@@ -374,7 +361,6 @@ class SalaryController extends Controller {
 		if (! (isset ( $pager )))
 			$pager = null;
 		
-		
 		$this->render ( 'salary_set', array (
 				'base_salary' => $base_salary,
 				'skill_allowance' => $skill_allowance,
@@ -392,7 +378,6 @@ class SalaryController extends Controller {
 		) );
 	}
 	public function actionleave_charge_update() {
-		
 		$temp = $_POST ['skill'];
 		$data = json_decode ( $temp );
 		// $a = json_encode ( $data );
@@ -415,7 +400,6 @@ class SalaryController extends Controller {
 		echo $request;
 	}
 	public function actiontraffic_allowance_update() {
-		
 		$temp = $_POST ['allowance'];
 		$data = json_decode ( $temp );
 		$data1 = array ();
@@ -463,8 +447,7 @@ class SalaryController extends Controller {
 	public function actionHousing_fund_update() 
 
 	{
-
-		$this->mytrim();
+		$this->mytrim ();
 		$temp = $_POST ['housing_fund'];
 		$data = json_decode ( $temp );
 		$data1 = array ();
@@ -488,7 +471,6 @@ class SalaryController extends Controller {
 		echo $request;
 	}
 	public function actionHousing_fund_edit() {
-		
 		$temp = $_POST ['housing_fund'];
 		$data = json_decode ( $temp );
 		$data1 = array ();
@@ -522,9 +504,8 @@ class SalaryController extends Controller {
 		echo $request;
 	}
 	public function actionSkill_allowance_add() {
-		
 		$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : 'false';
-		if ($department_id =='false') {
+		if ($department_id == 'false') {
 			echo 'error';
 			return;
 		}
@@ -535,7 +516,6 @@ class SalaryController extends Controller {
 		echo $data;
 	}
 	public function actionSkill_allowance_addinsert() {
-		
 		$department_id = (isset ( $_POST ['department_id'] )) ? $_POST ['department_id'] : FALSE;
 		$post_id = (isset ( $_POST ['post_id'] )) ? $_POST ['post_id'] : FALSE;
 		$title_id = (isset ( $_POST ['title_id'] )) ? $_POST ['title_id'] : FALSE;
@@ -555,7 +535,6 @@ class SalaryController extends Controller {
 		}
 	}
 	public function actionOvertime_salary_update() {
-		
 		$temp = $_POST ['overtime_salary'];
 		$data = json_decode ( $temp );
 		$data1 = array ();
@@ -581,7 +560,7 @@ class SalaryController extends Controller {
 		echo $request;
 	}
 	public function actionOvertime_salary_add() {
-		$this->mytrim();
+		$this->mytrim ();
 		$department_id = (isset ( $_POST ['department_id'] )) ? $_POST ['department_id'] : FALSE;
 		$post_id = (isset ( $_POST ['post_id'] )) ? $_POST ['post_id'] : FALSE;
 		$date_of_start = (isset ( $_POST ['date_of_start'] )) ? $_POST ['date_of_start'] : FALSE;
@@ -606,14 +585,14 @@ class SalaryController extends Controller {
 		}
 	}
 	public function actionBase_salary_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : '';
 		$post_id = isset ( $_POST ['post_id'] ) ? $_POST ['post_id'] : '';
 		$export = new export ();
 		$export->base_salary_export ( $department_id, $post_id );
 	}
 	public function actionSalary_Grant() {
-		$this->mytrim();
+		$this->mytrim ();
 		$table_type = (isset ( $_GET ['table_type'] )) ? $_GET ['table_type'] : '1';
 		
 		$Alldepartment = $this->getAlldepartmentname ();
@@ -674,7 +653,6 @@ class SalaryController extends Controller {
 					$month = $data ['month'];
 					$yuangongbianhao = trim ( $data ['employee_code'] );
 					$datetemp = $year . "-" . $month;
-				
 					
 					if ($yuangongbianhao == '') 
 
@@ -701,23 +679,23 @@ class SalaryController extends Controller {
 			case '2' :
 				
 				$selectsql = "SELECT e.remark_base_salary,e.remark_skill_allowance,g.remark as jiabanremark,i.remark as fulihejiremark,k.remark as wuxianyijin_remark,j.remark as tax_remark,
-h.remark as jixiaoremark,m.remark AS feiyongbutie_remark,
- a.*, b.department_id,b.post_id ,b.bank_card_number,b.bank_name,c.cn_name,d.post_cn_name,e.base_salary,
-e.skill_allowance,f.day_salary,f.night_salary,g.night_times, g.day_times,h.month_performance,i.total_amount as fuliheji,
-j.tax_amount,
-k.person_total,
-m.allowance_amount  ";
+				h.remark as jixiaoremark,m.remark AS feiyongbutie_remark,
+				 a.*, b.department_id,b.post_id ,b.bank_card_number,b.bank_name,c.cn_name,d.post_cn_name,e.base_salary,
+				e.skill_allowance,f.day_salary,f.night_salary,g.night_times, g.day_times,h.month_performance,i.total_amount as fuliheji,
+				j.tax_amount,
+				k.person_total,
+				m.allowance_amount  ";
 				
 				$whereSql = " FROM vcos_salary_pay as a, vcos_employment_profiles as b ,vcos_employee as c,
- vcos_post as d ,
- vcos_salary_management AS e
-,vcos_overtime_salary AS f,
- vcos_overtime_management AS g,
-vcos_performance_management as h,
- vcos_otherallowance_management as i,
- vcos_tax_management as j,
-vcos_fund_management AS k,
-vcos_allowance_management AS m
+				 vcos_post as d ,
+				 vcos_salary_management AS e
+				,vcos_overtime_salary AS f,
+				 vcos_overtime_management AS g,
+				vcos_performance_management as h,
+				 vcos_otherallowance_management as i,
+				 vcos_tax_management as j,
+				vcos_fund_management AS k,
+				vcos_allowance_management AS m
 				WHERE a.employee_code=b.employee_code AND
 				a.employee_code=c.employee_code
 				AND b.post_id=d.post_id AND
@@ -756,30 +734,28 @@ vcos_allowance_management AS m
 					$gongzifafang [$key] ['jiabangongzi'] = $row ['day_salary'] * $row ['day_times'] + $row ['night_salary'] * $row ['night_times'];
 				}
 				
-				
-				
 				break;
 			
 			case '3' :
 				
 				$selectsql = "SELECT e.remark_base_salary,e.remark_skill_allowance,g.remark as jiabanremark,i.remark as fulihejiremark,k.remark as wuxianyijin_remark,j.remark as tax_remark,
-h.remark as jixiaoremark,m.remark AS feiyongbutie_remark,
- a.*, b.department_id,b.post_id ,b.bank_card_number,b.bank_name,c.cn_name,d.post_cn_name,e.base_salary,
-e.skill_allowance,f.day_salary,f.night_salary,g.night_times, g.day_times,h.month_performance,i.total_amount as fuliheji,
-j.tax_amount,
-k.person_total,
-m.allowance_amount  ";
+				h.remark as jixiaoremark,m.remark AS feiyongbutie_remark,
+				 a.*, b.department_id,b.post_id ,b.bank_card_number,b.bank_name,c.cn_name,d.post_cn_name,e.base_salary,
+				e.skill_allowance,f.day_salary,f.night_salary,g.night_times, g.day_times,h.month_performance,i.total_amount as fuliheji,
+				j.tax_amount,
+				k.person_total,
+				m.allowance_amount  ";
 				
 				$whereSql = " FROM vcos_salary_pay as a, vcos_employment_profiles as b ,vcos_employee as c,
- vcos_post as d ,
- vcos_salary_management AS e
-,vcos_overtime_salary AS f,
- vcos_overtime_management AS g,
-vcos_performance_management as h,
- vcos_otherallowance_management as i,
- vcos_tax_management as j,
-vcos_fund_management AS k,
-vcos_allowance_management AS m
+				 vcos_post as d ,
+				 vcos_salary_management AS e
+				,vcos_overtime_salary AS f,
+				 vcos_overtime_management AS g,
+				vcos_performance_management as h,
+				 vcos_otherallowance_management as i,
+				 vcos_tax_management as j,
+				vcos_fund_management AS k,
+				vcos_allowance_management AS m
 				WHERE a.employee_code=b.employee_code AND
 				a.employee_code=c.employee_code
 				AND b.post_id=d.post_id AND
@@ -844,7 +820,7 @@ vcos_allowance_management AS m
 		) );
 	}
 	public function actionGongzifafang() {
-		$this->mytrim();
+		$this->mytrim ();
 		if (isset ( $_POST ['ids'] )) {
 			$ids = $_POST ['ids'];
 			
@@ -880,7 +856,7 @@ vcos_allowance_management AS m
 		}
 	}
 	public function actionSalary_pay_not_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		if ($_POST) {
 			$department_id = (isset ( $_POST ['department_id'] )) ? trim ( $_POST ['department_id'] ) : '';
 			$post_id = (isset ( $_POST ['post_id'] )) ? trim ( $_POST ['post_id'] ) : '';
@@ -893,7 +869,7 @@ vcos_allowance_management AS m
 		}
 	}
 	public function actionSalary_pay_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		if ($_POST) {
 			$department_id = (isset ( $_POST ['department_id'] )) ? trim ( $_POST ['department_id'] ) : '';
 			$post_id = (isset ( $_POST ['post_id'] )) ? trim ( $_POST ['post_id'] ) : '';
@@ -906,7 +882,7 @@ vcos_allowance_management AS m
 		}
 	}
 	public function actionSalary_Statistics() {
-		$this->mytrim();
+		$this->mytrim ();
 		$table_type = (isset ( $_GET ['table_type'] )) ? $_GET ['table_type'] : '1';
 		
 		switch ($table_type) {
@@ -1161,7 +1137,7 @@ vcos_allowance_management AS m
 		return $post ['yearcount']; // 返回得到的所有职务这个月的合计工资
 	}
 	public function actionStatistics_month_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		// 设置默认值
 		$smalleryear = 2015;
 		$smallermonth = 1;
@@ -1187,7 +1163,7 @@ vcos_allowance_management AS m
 		$export->Employee_month_salary_export ( $smalleryear, $smallermonth );
 	}
 	public function actionStatistics_year_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		$smalleryear = 2012;
 		$biggeryear = 2016;
 		if ($_POST) {
@@ -1210,18 +1186,18 @@ vcos_allowance_management AS m
 		$export->Employee_year_salary_export ( $smalleryear, $biggeryear );
 	}
 	public function actionSkill_allowance_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		if ($_POST) {
 			
 			$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : '';
 			$post_id = isset ( $_POST ['post_id'] ) ? $_POST ['post_id'] : '';
 			$filename = "技能工龄津贴标准表";
 			$export = new export ();
-			$export->skill_allowance_export( $department_id, $post_id, $filename );
+			$export->skill_allowance_export ( $department_id, $post_id, $filename );
 		}
 	}
 	public function actionLeave_charge_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		if ($_POST) {
 			
 			$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : '';
@@ -1232,7 +1208,7 @@ vcos_allowance_management AS m
 		}
 	}
 	public function actionHousing_fund_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		if ($_POST) {
 			
 			$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : '';
@@ -1243,7 +1219,7 @@ vcos_allowance_management AS m
 		}
 	}
 	public function actionTraffic_allowance_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		if ($_POST) {
 			
 			$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : '';
@@ -1254,7 +1230,7 @@ vcos_allowance_management AS m
 		}
 	}
 	public function actionOvertime_salary_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		if ($_POST) {
 			$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : '';
 			$post_id = isset ( $_POST ['post_id'] ) ? $_POST ['post_id'] : '';
@@ -1265,21 +1241,19 @@ vcos_allowance_management AS m
 		}
 	}
 	public function actionDownload() {
-		$this->mytrim();
+		$this->mytrim ();
 		$file_path = './download/';
 		
 		$filename = $_GET ['filename'];
 		$file_path .= $filename;
-
-		header('Content-Type:application/octet-stream');
-		header ('content-disposition:attachment;filename='.basename($file_path));
-		header ('content-length:'.filesize($file_path));
-		readfile ($file_path);
+		
+		header ( 'Content-Type:application/octet-stream' );
+		header ( 'content-disposition:attachment;filename=' . basename ( $file_path ) );
+		header ( 'content-length:' . filesize ( $file_path ) );
+		readfile ( $file_path );
 	}
 	public function actionImport_basesalary() {
-		$this->mytrim();
-
-
+		$this->mytrim ();
 		
 		if (! isset ( $_FILES ['myFile'] ['tmp_name'] )) {
 			Helper::show_message ( yii::t ( 'vcos', '请上传文件。' ) );
@@ -1299,9 +1273,9 @@ vcos_allowance_management AS m
 		foreach ( $objPHPExcel->getWorksheetIterator () as $sheet ) { // 循环取sheet
 			$i = 0;
 			foreach ( $sheet->getRowIterator () as $row ) {
-			 // 逐行处理
-	            // echo '$row->getRowIndex ()';
-	            // var_dump ( $row->getRowIndex () );
+				// 逐行处理
+				// echo '$row->getRowIndex ()';
+				// var_dump ( $row->getRowIndex () );
 				if ($row->getRowIndex () < 3) { // 从第三行开始读，不要标题，不要列名
 					continue;
 				}
@@ -1311,130 +1285,90 @@ vcos_allowance_management AS m
 				
 				foreach ( $row->getCellIterator () as $cell ) { // 逐列读取
 					$Data [$i] [$j] = $cell->getValue (); // 获取单元格数据
-	                  $data = $cell->getValue (); // 获取单元格数据
-	                
+					$data = $cell->getValue (); // 获取单元格数据
+					
 					$j ++;
 				}
-
-			     
+				
 				$i ++;
-				
-				
 			}
-			
-			
 		}
 		
-
-
-
-
-        $models=array();
-		foreach ($Data as  $row) {
-
-
-			$overtime_management=new overtime_management ();
-
-			foreach ($row as $key => $value)
-			 {
-
-
-
-				switch ($key)
-				 {
-				case '0':
-					$overtime_management ->date = $value;
-					if($value=='')
-					{
-						Helper::show_message ( yii::t ( 'vcos', '月份不能为空。' ) );
-						exit();
-
-					}
-					break;
-				case '1':
-					$overtime_management ->employee_code= $value;
-					if($value=='')
-					{
-						Helper::show_message ( yii::t ( 'vcos', '员工编码不能为空。' ) );
-						exit();
-
-					}
-					break;
-				case '2':
-				    if($value=='')
-					{
-						$value='0';
-
-					}
-					$overtime_management ->day_times= $value;
-
-					break;
-				case '3':
-				     if($value=='')
-					{
-						$value='0';
-
-					}
-					$overtime_management ->night_times= $value;
-					break;
-				case '4':
-					$overtime_management ->remark= $value;
-					break;
-				
-				default:
-					# code...
-					break;
-			    }
+		$models = array ();
+		foreach ( $Data as $row ) {
 			
+			$overtime_management = new overtime_management ();
+			
+			foreach ( $row as $key => $value ) {
+				
+				switch ($key) {
+					case '0' :
+						$overtime_management->date = $value;
+						if ($value == '') {
+							Helper::show_message ( yii::t ( 'vcos', '月份不能为空。' ) );
+							exit ();
+						}
+						break;
+					case '1' :
+						$overtime_management->employee_code = $value;
+						if ($value == '') {
+							Helper::show_message ( yii::t ( 'vcos', '员工编码不能为空。' ) );
+							exit ();
+						}
+						break;
+					case '2' :
+						if ($value == '') {
+							$value = '0';
+						}
+						$overtime_management->day_times = $value;
+						
+						break;
+					case '3' :
+						if ($value == '') {
+							$value = '0';
+						}
+						$overtime_management->night_times = $value;
+						break;
+					case '4' :
+						$overtime_management->remark = $value;
+						break;
+					
+					default :
+						// code...
+						break;
+				}
 			}
-
-			$models[]=$overtime_management;
-
+			
+			$models [] = $overtime_management;
+			
 			// $count = $overtime_management->save ();
-
-				
-			}
-
-
-
-
-
-			$transaction=Yii::app()->db->beginTransaction();
-					try{
-					 foreach ($models as $model) {
-					 if (!$model->save()) {
-					 throw new Exception();
-					}
-					}
-					$transaction->commit();
-
-					Helper::show_message ( yii::t ( 'vcos', '导入成功。' ) );
-					} catch(Exception $e){
-					$transaction->rollBack();//回滚事务
-
-					Helper::show_message ( yii::t ( 'vcos', '导入失败，请注意格式。' ) );
-
-
-
-
-
-					}
-			
-
+		}
 		
-
-
+		$transaction = Yii::app ()->db->beginTransaction ();
+		try {
+			foreach ( $models as $model ) {
+				if (! $model->save ()) {
+					throw new Exception ();
+				}
+			}
+			$transaction->commit ();
+			
+			Helper::show_message ( yii::t ( 'vcos', '导入成功。' ) );
+		} catch ( Exception $e ) {
+			$transaction->rollBack (); // 回滚事务
+			
+			Helper::show_message ( yii::t ( 'vcos', '导入失败，请注意格式。' ) );
+		}
+		
 		exit ();
 	}
 	
-
-
 	/*
-
-     其他福利导入
-	*/
+	 *
+	 * 其他福利导入
+	 */
 	public function actionImport_otherallowance_management() {
-		$this->mytrim();
+		$this->mytrim ();
 		
 		if (! isset ( $_FILES ['myFile'] ['tmp_name'] )) {
 			Helper::show_message ( yii::t ( 'vcos', '请上传文件。' ) );
@@ -1454,9 +1388,9 @@ vcos_allowance_management AS m
 		foreach ( $objPHPExcel->getWorksheetIterator () as $sheet ) { // 循环取sheet
 			$i = 0;
 			foreach ( $sheet->getRowIterator () as $row ) {
-			 // 逐行处理
-	            // echo '$row->getRowIndex ()';
-	            // var_dump ( $row->getRowIndex () );
+				// 逐行处理
+				// echo '$row->getRowIndex ()';
+				// var_dump ( $row->getRowIndex () );
 				if ($row->getRowIndex () < 3) { // 从第三行开始读，不要标题，不要列名
 					continue;
 				}
@@ -1466,138 +1400,91 @@ vcos_allowance_management AS m
 				
 				foreach ( $row->getCellIterator () as $cell ) { // 逐列读取
 					$Data [$i] [$j] = $cell->getValue (); // 获取单元格数据
-	                  // $data = $cell->getValue (); // 获取单元格数据
-	                  if($j==0 || $j==1)
-	                  {
-	                  	if($Data [$i] [$j]=='')
-	                  	{
-	                  	Helper::show_message ( yii::t ( 'vcos', '导入失败。' ) );
-	                  		exit();
-	                  	}
-	                  }
-	                
+					                                      // $data = $cell->getValue (); // 获取单元格数据
+					if ($j == 0 || $j == 1) {
+						if ($Data [$i] [$j] == '') {
+							Helper::show_message ( yii::t ( 'vcos', '导入失败。' ) );
+							exit ();
+						}
+					}
+					
 					$j ++;
 				}
-
-			     
+				
 				$i ++;
-				
-				
 			}
-			
-			
 		}
 		
-
-
-	
-
-
-
-
-        $models=array();
-		foreach ($Data as  $row) {
-
-
-			$otherallowance_management=new otherallowance_management ();
-
-			foreach ($row as $key => $value)
-			 {
-
-
-
-				switch ($key)
-				 {
-				case '0':
-					$otherallowance_management ->date = $value;
-					if($value=='')
-					{
-						Helper::show_message ( yii::t ( 'vcos', '月份不能为空。' ) );
-						exit();
-
-					}
-					break;
-				case '1':
-					$otherallowance_management ->employee_code= $value;
-					if($value=='')
-					{
-						Helper::show_message ( yii::t ( 'vcos', '员工编码不能为空。' ) );
-						exit();
-
-					}
-					break;
-				case '2':
-				    if($value=='')
-					{
-						$value='0';
-
-					}
-					$otherallowance_management ->total_amount= $value;
-
-					break;
-				case '3':
-				  
-					$otherallowance_management->remark= $value;
-					break;
-				
-				default:
-					# code...
-					break;
-			    }
+		$models = array ();
+		foreach ( $Data as $row ) {
 			
+			$otherallowance_management = new otherallowance_management ();
+			
+			foreach ( $row as $key => $value ) {
+				
+				switch ($key) {
+					case '0' :
+						$otherallowance_management->date = $value;
+						if ($value == '') {
+							Helper::show_message ( yii::t ( 'vcos', '月份不能为空。' ) );
+							exit ();
+						}
+						break;
+					case '1' :
+						$otherallowance_management->employee_code = $value;
+						if ($value == '') {
+							Helper::show_message ( yii::t ( 'vcos', '员工编码不能为空。' ) );
+							exit ();
+						}
+						break;
+					case '2' :
+						if ($value == '') {
+							$value = '0';
+						}
+						$otherallowance_management->total_amount = $value;
+						
+						break;
+					case '3' :
+						
+						$otherallowance_management->remark = $value;
+						break;
+					
+					default :
+						// code...
+						break;
+				}
 			}
-
-			$models[]=$otherallowance_management;
-
+			
+			$models [] = $otherallowance_management;
+			
 			// $count = $overtime_management->save ();
-
-				
-			}
-
-
-
-
-
-			$transaction=Yii::app()->db->beginTransaction();
-					try{
-					 foreach ($models as $model) {
-					 if (!$model->save()) {
-					 throw new Exception();
-					}
-					}
-					$transaction->commit();
-
-					Helper::show_message ( yii::t ( 'vcos', '导入成功。' ) );
-					} catch(Exception $e){
-					$transaction->rollBack();//回滚事务
-
-					Helper::show_message ( yii::t ( 'vcos', '导入失败，请注意格式。' ) );
-
-
-
-
-
-					}
-			
-
+		}
 		
-
-
+		$transaction = Yii::app ()->db->beginTransaction ();
+		try {
+			foreach ( $models as $model ) {
+				if (! $model->save ()) {
+					throw new Exception ();
+				}
+			}
+			$transaction->commit ();
+			
+			Helper::show_message ( yii::t ( 'vcos', '导入成功。' ) );
+		} catch ( Exception $e ) {
+			$transaction->rollBack (); // 回滚事务
+			
+			Helper::show_message ( yii::t ( 'vcos', '导入失败，请注意格式。' ) );
+		}
+		
 		exit ();
 	}
-
-
 	
-
-
 	/*
-
-     税收导入
-	*/
+	 *
+	 * 税收导入
+	 */
 	public function actionImport_tax_management() {
-		$this->mytrim();
-		
-		
+		$this->mytrim ();
 		
 		if (! isset ( $_FILES ['myFile'] ['tmp_name'] )) {
 			Helper::show_message ( yii::t ( 'vcos', '请上传文件。' ) );
@@ -1617,9 +1504,9 @@ vcos_allowance_management AS m
 		foreach ( $objPHPExcel->getWorksheetIterator () as $sheet ) { // 循环取sheet
 			$i = 0;
 			foreach ( $sheet->getRowIterator () as $row ) {
-			 // 逐行处理
-	            // echo '$row->getRowIndex ()';
-	            // var_dump ( $row->getRowIndex () );
+				// 逐行处理
+				// echo '$row->getRowIndex ()';
+				// var_dump ( $row->getRowIndex () );
 				if ($row->getRowIndex () < 3) { // 从第三行开始读，不要标题，不要列名
 					continue;
 				}
@@ -1629,138 +1516,92 @@ vcos_allowance_management AS m
 				
 				foreach ( $row->getCellIterator () as $cell ) { // 逐列读取
 					$Data [$i] [$j] = $cell->getValue (); // 获取单元格数据
-	                  // $data = $cell->getValue (); // 获取单元格数据
-	                  if($j==0 || $j==1)
-	                  {
-	                  	if($Data [$i] [$j]=='')
-	                  	{
-	                  	Helper::show_message ( yii::t ( 'vcos', '导入失败。' ) );
-	                  		exit();
-	                  	}
-	                  }
-	                
+					                                      // $data = $cell->getValue (); // 获取单元格数据
+					if ($j == 0 || $j == 1) {
+						if ($Data [$i] [$j] == '') {
+							Helper::show_message ( yii::t ( 'vcos', '导入失败。' ) );
+							exit ();
+						}
+					}
+					
 					$j ++;
 				}
-
-			     
+				
 				$i ++;
-				
-				
 			}
-			
-			
 		}
 		
-
-
-	
-
-
-
-
-        $models=array();
-		foreach ($Data as  $row) {
-
-
-			$otherallowance_management=new otherallowance_management ();
-
-			foreach ($row as $key => $value)
-			 {
-
-
-
-				switch ($key)
-				 {
-				case '0':
-					$otherallowance_management ->date = $value;
-					if($value=='')
-					{
-						Helper::show_message ( yii::t ( 'vcos', '月份不能为空。' ) );
-						exit();
-
-					}
-					break;
-				case '1':
-					$otherallowance_management ->employee_code= $value;
-					if($value=='')
-					{
-						Helper::show_message ( yii::t ( 'vcos', '员工编码不能为空。' ) );
-						exit();
-
-					}
-					break;
-				case '2':
-				    if($value=='')
-					{
-						$value='0';
-
-					}
-					$otherallowance_management ->total_amount= $value;
-
-					break;
-				case '3':
-				  
-					$otherallowance_management->remark= $value;
-					break;
-				
-				default:
-					# code...
-					break;
-			    }
+		$models = array ();
+		foreach ( $Data as $row ) {
 			
+			$otherallowance_management = new otherallowance_management ();
+			
+			foreach ( $row as $key => $value ) {
+				
+				switch ($key) {
+					case '0' :
+						$otherallowance_management->date = $value;
+						if ($value == '') {
+							Helper::show_message ( yii::t ( 'vcos', '月份不能为空。' ) );
+							exit ();
+						}
+						break;
+					case '1' :
+						$otherallowance_management->employee_code = $value;
+						if ($value == '') {
+							Helper::show_message ( yii::t ( 'vcos', '员工编码不能为空。' ) );
+							exit ();
+						}
+						break;
+					case '2' :
+						if ($value == '') {
+							$value = '0';
+						}
+						$otherallowance_management->total_amount = $value;
+						
+						break;
+					case '3' :
+						
+						$otherallowance_management->remark = $value;
+						break;
+					
+					default :
+						// code...
+						break;
+				}
 			}
-
-			$models[]=$otherallowance_management;
-
+			
+			$models [] = $otherallowance_management;
+			
 			// $count = $overtime_management->save ();
-
-				
-			}
-
-
-
-
-
-			$transaction=Yii::app()->db->beginTransaction();
-					try{
-					 foreach ($models as $model) {
-					 if (!$model->save()) {
-					 throw new Exception();
-					}
-					}
-					$transaction->commit();
-
-					Helper::show_message ( yii::t ( 'vcos', '导入成功。' ) );
-					} catch(Exception $e){
-					$transaction->rollBack();//回滚事务
-
-					Helper::show_message ( yii::t ( 'vcos', '导入失败，请注意格式。' ) );
-
-
-
-
-
-					}
-			
-
+		}
 		
-
-
+		$transaction = Yii::app ()->db->beginTransaction ();
+		try {
+			foreach ( $models as $model ) {
+				if (! $model->save ()) {
+					throw new Exception ();
+				}
+			}
+			$transaction->commit ();
+			
+			Helper::show_message ( yii::t ( 'vcos', '导入成功。' ) );
+		} catch ( Exception $e ) {
+			$transaction->rollBack (); // 回滚事务
+			
+			Helper::show_message ( yii::t ( 'vcos', '导入失败，请注意格式。' ) );
+		}
+		
 		exit ();
 	}
-
-
-
-
+	
 	/**
 	 * 工资计算 基本工资查询导出
 	 */
-    public function actionOvertime_managment_export()
-    {
-    	$this->mytrim();
-
-    	
-    	$department_id = '';
+	public function actionOvertime_managment_export() {
+		$this->mytrim ();
+		
+		$department_id = '';
 		$post_id = '';
 		$employee_code = '';
 		$cn_name = '';
@@ -1778,11 +1619,9 @@ vcos_allowance_management AS m
 		$filename = '加班明细查询表';
 		$export = new export ();
 		$export->Overtime_managment_export ( $department_id, $post_id, $employee_code, $cn_name, $date, $filename );
-
-    }
-
+	}
 	public function actionSalary_managment_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		$department_id = '';
 		$post_id = '';
 		$employee_code = '';
@@ -1805,10 +1644,8 @@ vcos_allowance_management AS m
 	public function actionSalary_Calculate() {
 		require_once 'a.php';
 	}
-
-	
 	public function actionPerformance_management_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		$department_id = '';
 		$post_id = '';
 		$employee_code = '';
@@ -1828,12 +1665,9 @@ vcos_allowance_management AS m
 		$export = new export ();
 		$export->Performance_management_export ( $department_id, $post_id, $employee_code, $cn_name, $date, $filename );
 	}
-
-	
 	public function actionTax_management_export() {
-
-     $this->mytrim();
-
+		$this->mytrim ();
+		
 		$department_id = '';
 		$post_id = '';
 		$employee_code = '';
@@ -1853,14 +1687,8 @@ vcos_allowance_management AS m
 		$export = new export ();
 		$export->Tax_management_export ( $department_id, $post_id, $employee_code, $cn_name, $date, $filename );
 	}
-
-
-	
-
 	public function actionAllowance_management_export() {
-
-
-        $this->mytrim();
+		$this->mytrim ();
 		$department_id = '';
 		$post_id = '';
 		$employee_code = '';
@@ -1880,10 +1708,8 @@ vcos_allowance_management AS m
 		$export = new export ();
 		$export->Allowance_management_export ( $department_id, $post_id, $employee_code, $cn_name, $date, $filename );
 	}
-
-	
 	public function actionOtherallowance_management_export() {
-         $this->mytrim();
+		$this->mytrim ();
 		$department_id = '';
 		$post_id = '';
 		$employee_code = '';
@@ -1902,11 +1728,8 @@ vcos_allowance_management AS m
 		$export = new export ();
 		$export->Otherallowance_management_export ( $department_id, $post_id, $employee_code, $cn_name, $date, $filename );
 	}
-
-
-	public function actionGetpost_bydepartment()
-	{
-		$this->mytrim();
+	public function actionGetpost_bydepartment() {
+		$this->mytrim ();
 		$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : 'false';
 		if ($department_id == false) {
 			echo 'error';
@@ -1917,70 +1740,58 @@ vcos_allowance_management AS m
 		$data = json_encode ( $data );
 		echo $data;
 	}
-
-//通过部门，职务，名字确定员工编号
-	public function actionGet_employee_code()
-	{
-        $this->mytrim();
+	
+	// 通过部门，职务，名字确定员工编号
+	public function actionGet_employee_code() {
+		$this->mytrim ();
 		$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : 'false';
-		if ($department_id =='false') {
+		if ($department_id == 'false') {
 			echo 'error';
 			return;
 		}
-
+		
 		$post_id = isset ( $_POST ['post_id'] ) ? $_POST ['post_id'] : 'false';
-
-
-		if ($post_id=='false') {
+		
+		if ($post_id == 'false') {
 			echo 'post_error';
 			return;
 		}
-
+		
 		$cn_name = isset ( $_POST ['cn_name'] ) ? $_POST ['cn_name'] : 'false';
-
-		if ($cn_name=='false') {
+		
+		if ($cn_name == 'false') {
 			echo 'cn_name_error';
 			return;
 		}
-
-
-		$sql="SELECT b.employee_code  FROM  vcos_employment_profiles as a ,vcos_employee as b
+		
+		$sql = "SELECT b.employee_code  FROM  vcos_employment_profiles as a ,vcos_employee as b
 				WHERE a.department_id='{$department_id}'
 				and a.post_id='{$post_id}'
 				and a.employee_code=b.employee_code
 				and b.cn_name='{$cn_name}'
 		";
-
 		
 		$data = Yii::app ()->m_db->createCommand ( $sql )->queryAll ();
 		$data = json_encode ( $data );
 		echo $data;
-
-
 	}
-
-
-   public function actionGetcn_name()
-   {
-
-       $this->mytrim();
-
+	public function actionGetcn_name() {
+		$this->mytrim ();
+		
 		$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : 'false';
-		if ($department_id =='false') {
+		if ($department_id == 'false') {
 			echo 'error';
 			return;
 		}
-
-
+		
 		$post_id = isset ( $_POST ['post_id'] ) ? $_POST ['post_id'] : 'false';
-
-
-		if ($post_id=='false') {
+		
+		if ($post_id == 'false') {
 			echo 'post_error';
 			return;
 		}
-
-		$sql="SELECT  a.cn_name FROM vcos_employee as a,  vcos_employment_profiles   as b
+		
+		$sql = "SELECT  a.cn_name FROM vcos_employee as a,  vcos_employment_profiles   as b
 				WHERE   b.department_id={$department_id}
 				AND  b.post_id={$post_id}
 				and a.employee_code=b.employee_code
@@ -1989,28 +1800,24 @@ vcos_allowance_management AS m
 		
 		$data = json_encode ( $data );
 		echo $data;
-
-   }
-
-
-
-   public function actionOtherallowance_edit() {
-   	$this->mytrim();
-        $id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
+	}
+	public function actionOtherallowance_edit() {
+		$this->mytrim ();
+		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
 		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] : FALSE;
 		$total_amount = (isset ( $_POST ['total_amount'] )) ? $_POST ['total_amount'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		$date = (isset ( $_POST ['date'] )) ? $_POST ['date'] : FALSE;
-		$status='0';
-        $total_amount=trim($total_amount);
-        $remark=trim($remark);
+		$status = '0';
+		$total_amount = trim ( $total_amount );
+		$remark = trim ( $remark );
 		
 		$otherallowance_management = otherallowance_management::model ()->findByPk ( $id );
-		$otherallowance_management->id=$id;
+		$otherallowance_management->id = $id;
 		$otherallowance_management->employee_code = $employee_code;
 		$otherallowance_management->total_amount = $total_amount;
 		$otherallowance_management->remark = $remark;
-		$otherallowance_management->date  = $date ;
+		$otherallowance_management->date = $date;
 		$otherallowance_management->status = $status;
 		
 		$count = $otherallowance_management->save ();
@@ -2020,28 +1827,23 @@ vcos_allowance_management AS m
 			Helper::show_message ( yii::t ( 'vcos', '添加失败。' ) );
 		}
 	}
-
-
-
-
-public function actionOtherallowance_add() 
-	  {
-	  	$this->mytrim();
-        
+	public function actionOtherallowance_add() {
+		$this->mytrim ();
+		
 		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] : FALSE;
 		$total_amount = (isset ( $_POST ['total_amount'] )) ? $_POST ['total_amount'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		$date = (isset ( $_POST ['date'] )) ? $_POST ['date'] : FALSE;
-		$status='0';
-        $total_amount=trim($total_amount);
-        $remark=trim($remark);
+		$status = '0';
+		$total_amount = trim ( $total_amount );
+		$remark = trim ( $remark );
 		
-		$otherallowance_management = new otherallowance_management();
+		$otherallowance_management = new otherallowance_management ();
 		
-		$otherallowance_management->employee_code =$employee_code;
+		$otherallowance_management->employee_code = $employee_code;
 		$otherallowance_management->total_amount = $total_amount;
 		$otherallowance_management->remark = $remark;
-		$otherallowance_management->date  = $date ;
+		$otherallowance_management->date = $date;
 		$otherallowance_management->status = $status;
 		
 		$count = $otherallowance_management->save ();
@@ -2051,27 +1853,23 @@ public function actionOtherallowance_add()
 			Helper::show_message ( yii::t ( 'vcos', '添加失败。' ) );
 		}
 	}
-
-
-
 	public function actionAllowance_management_edit() {
-		$this->mytrim();
-        $id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
+		$this->mytrim ();
+		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
 		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] : FALSE;
 		$allowance_amount = (isset ( $_POST ['allowance_amount'] )) ? $_POST ['allowance_amount'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		$date = (isset ( $_POST ['date'] )) ? $_POST ['date'] : FALSE;
-		$date =trim($date );
-        $allowance_amount=trim($allowance_amount);
-        $remark=trim($remark);
+		$date = trim ( $date );
+		$allowance_amount = trim ( $allowance_amount );
+		$remark = trim ( $remark );
 		
 		$allowance_management = allowance_management::model ()->findByPk ( $id );
-		$allowance_management->id=$id;
+		$allowance_management->id = $id;
 		$allowance_management->employee_code = $employee_code;
 		$allowance_management->allowance_amount = $allowance_amount;
 		$allowance_management->remark = $remark;
-		$allowance_management->date  = $date ;
-		
+		$allowance_management->date = $date;
 		
 		$count = $allowance_management->save ();
 		if ($count > 0) {
@@ -2080,26 +1878,22 @@ public function actionOtherallowance_add()
 			Helper::show_message ( yii::t ( 'vcos', '添加失败。' ) );
 		}
 	}
-
-	public function actionAllowance_management_add() 
-	  {
-        $this->mytrim();
+	public function actionAllowance_management_add() {
+		$this->mytrim ();
 		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] : FALSE;
 		$allowance_amount = (isset ( $_POST ['allowance_amount'] )) ? $_POST ['allowance_amount'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		$date = (isset ( $_POST ['date'] )) ? $_POST ['date'] : FALSE;
-		$date=trim($date);
-        $allowance_amount=trim($allowance_amount);
-        $remark=trim($remark);
-
-
-		$allowance_management = new allowance_management();
+		$date = trim ( $date );
+		$allowance_amount = trim ( $allowance_amount );
+		$remark = trim ( $remark );
 		
+		$allowance_management = new allowance_management ();
 		
 		$allowance_management->employee_code = $employee_code;
 		$allowance_management->allowance_amount = $allowance_amount;
 		$allowance_management->remark = $remark;
-		$allowance_management->date  = $date ;
+		$allowance_management->date = $date;
 		
 		$count = $allowance_management->save ();
 		if ($count > 0) {
@@ -2108,26 +1902,23 @@ public function actionOtherallowance_add()
 			Helper::show_message ( yii::t ( 'vcos', '添加失败。' ) );
 		}
 	}
-
-	public function actionTax_management_add() 
-	  {
-        $this->mytrim();
+	public function actionTax_management_add() {
+		$this->mytrim ();
 		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] : FALSE;
 		$tax_amount = (isset ( $_POST ['tax_amount'] )) ? $_POST ['tax_amount'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		$date = (isset ( $_POST ['date'] )) ? $_POST ['date'] : FALSE;
-		$date=trim($date);
-        $tax_amount=trim($tax_amount);
-        $remark=trim($remark);
-        $status='0';
-
-    
-		$tax_management = new tax_management();
+		$date = trim ( $date );
+		$tax_amount = trim ( $tax_amount );
+		$remark = trim ( $remark );
+		$status = '0';
+		
+		$tax_management = new tax_management ();
 		$tax_management->employee_code = $employee_code;
 		$tax_management->tax_amount = $tax_amount;
 		$tax_management->remark = $remark;
-		$tax_management->date  = $date ;
-		$tax_management->status  = $status;
+		$tax_management->date = $date;
+		$tax_management->status = $status;
 		
 		$count = $tax_management->save ();
 		if ($count > 0) {
@@ -2136,26 +1927,23 @@ public function actionOtherallowance_add()
 			Helper::show_message ( yii::t ( 'vcos', '添加失败。' ) );
 		}
 	}
-
-
-	public function actionTax_management_edit() 
-	  {
-	  	$this->mytrim();
-          $id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
+	public function actionTax_management_edit() {
+		$this->mytrim ();
+		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
 		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] : FALSE;
 		$tax_amount = (isset ( $_POST ['tax_amount'] )) ? $_POST ['tax_amount'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		$date = (isset ( $_POST ['date'] )) ? $_POST ['date'] : FALSE;
-		$date=trim($date);
-        $tax_amount=trim($tax_amount);
-        $remark=trim($remark);
-    
+		$date = trim ( $date );
+		$tax_amount = trim ( $tax_amount );
+		$remark = trim ( $remark );
+		
 		$tax_management = tax_management::model ()->findByPk ( $id );
-		$tax_management->id=$id;
+		$tax_management->id = $id;
 		$tax_management->employee_code = $employee_code;
 		$tax_management->tax_amount = $tax_amount;
 		$tax_management->remark = $remark;
-		$tax_management->date  = $date ;
+		$tax_management->date = $date;
 		
 		$count = $tax_management->save ();
 		if ($count > 0) {
@@ -2164,41 +1952,33 @@ public function actionOtherallowance_add()
 			Helper::show_message ( yii::t ( 'vcos', '添加失败。' ) );
 		}
 	}
-
-
-
-
-
-	public function actionOvertime_management_edit() 
-	  {
-        $this->mytrim();
-         $id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
-		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] :'';
-
-		if($employee_code=='')
-		{
+	public function actionOvertime_management_edit() {
+		$this->mytrim ();
+		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
+		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] : '';
+		
+		if ($employee_code == '') {
 			Helper::show_message ( yii::t ( 'vcos', '员工编号不能为空。' ) );
-
-			return ;
+			
+			return;
 		}
-
-
+		
 		$day_times = (isset ( $_POST ['day_times'] )) ? $_POST ['day_times'] : FALSE;
 		$night_times = (isset ( $_POST ['night_times'] )) ? $_POST ['night_times'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		$date = (isset ( $_POST ['date'] )) ? $_POST ['date'] : FALSE;
 		
-		$date=trim($date);
-		$day_times=trim($day_times);
-		$night_times=trim($night_times);
-        $remark=trim($remark);
+		$date = trim ( $date );
+		$day_times = trim ( $day_times );
+		$night_times = trim ( $night_times );
+		$remark = trim ( $remark );
 		$overtime_management = overtime_management::model ()->findByPk ( $id );
-		$overtime_management->id=$id;
+		$overtime_management->id = $id;
 		$overtime_management->employee_code = $employee_code;
 		$overtime_management->day_times = $day_times;
-		$overtime_management->night_times = $night_times ;
+		$overtime_management->night_times = $night_times;
 		$overtime_management->remark = $remark;
-		$overtime_management->date = $date ;
+		$overtime_management->date = $date;
 		
 		$count = $overtime_management->save ();
 		if ($count > 0) {
@@ -2207,38 +1987,32 @@ public function actionOtherallowance_add()
 			Helper::show_message ( yii::t ( 'vcos', '添加失败。' ) );
 		}
 	}
-
-
-	public function actionOvertime_management_add() 
-	  {
-
-	  
-           $this->mytrim();
-          
+	public function actionOvertime_management_add() {
+		$this->mytrim ();
+		
 		$employee_code = (isset ( $_POST ['employee_code'] )) ? $_POST ['employee_code'] : '';
-
-		if($employee_code=='')
-		{
+		
+		if ($employee_code == '') {
 			Helper::show_message ( yii::t ( 'vcos', '员工编号不能为空。' ) );
-
-			return ;
+			
+			return;
 		}
 		$day_times = (isset ( $_POST ['day_times'] )) ? $_POST ['day_times'] : FALSE;
 		$night_times = (isset ( $_POST ['night_times'] )) ? $_POST ['night_times'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		$date = (isset ( $_POST ['date'] )) ? $_POST ['date'] : FALSE;
-		$status='0';
-		$date=trim($date);
-		$day_times=trim($day_times);
-		$night_times=trim($night_times);
-        $remark=trim($remark);
-		$overtime_management = new overtime_management();
-	
+		$status = '0';
+		$date = trim ( $date );
+		$day_times = trim ( $day_times );
+		$night_times = trim ( $night_times );
+		$remark = trim ( $remark );
+		$overtime_management = new overtime_management ();
+		
 		$overtime_management->employee_code = $employee_code;
 		$overtime_management->day_times = $day_times;
-		$overtime_management->night_times = $night_times ;
+		$overtime_management->night_times = $night_times;
 		$overtime_management->remark = $remark;
-		$overtime_management->date = $date ;
+		$overtime_management->date = $date;
 		$overtime_management->status = $status;
 		
 		$count = $overtime_management->save ();
@@ -2248,63 +2022,43 @@ public function actionOtherallowance_add()
 			Helper::show_message ( yii::t ( 'vcos', '添加失败。' ) );
 		}
 	}
-
-
-	public function actionAllowance_management_generate()
-	{
-
-
-		//   'year' => string '2015' (length=4)
-  // 'month' => string '01' (length=2)
-  // 'employee_code' => string '' (length=0)
-
-		$this->mytrim();
-
+	public function actionAllowance_management_generate() {
+		
+		// 'year' => string '2015' (length=4)
+		// 'month' => string '01' (length=2)
+		// 'employee_code' => string '' (length=0)
+		$this->mytrim ();
+		
 		$year = (isset ( $_POST ['department_id'] )) ? $_POST ['department_id'] : FALSE;
 		$month = (isset ( $_POST ['post_cn_name'] )) ? $_POST ['post_cn_name'] : FALSE;
 		$employee_code = (isset ( $_POST ['post_en_name'] )) ? $_POST ['post_en_name'] : FALSE;
+		
+		if ((preg_match ( '/^[1-9]\d{3}/', $year )) == false) 
 
-
-	    if ((preg_match('/^[1-9]\d{3}/', $year))==false) 
-
-	    {
-                Helper::show_message ( yii::t ( 'vcos', '年份不对' ) );
-
-	    }
-
-	    //匹配月份
-
-	    if(preg_match('/^[0][1-9]$/', $month) || preg_match('/^[1][1-2]$/', $month))
-      {
-
-
-      }
-      else{
-      	
-      }
-
-
-	    
-
-
-
-		exit();
-
-		$whereSql="where employee_code='{}'";
-
-		$sql="SELECT b.employee_code  FROM  vcos_employment_profiles as a ,vcos_employee as b
+		{
+			Helper::show_message ( yii::t ( 'vcos', '年份不对' ) );
+		}
+		
+		// 匹配月份
+		
+		if (preg_match ( '/^[0][1-9]$/', $month ) || preg_match ( '/^[1][1-2]$/', $month )) {
+		} else {
+		}
+		
+		exit ();
+		
+		$whereSql = "where employee_code='{}'";
+		
+		$sql = "SELECT b.employee_code  FROM  vcos_employment_profiles as a ,vcos_employee as b
 				WHERE a.department_id='{$department_id}'
 				and a.post_id='{$post_id}'
 				and a.employee_code=b.employee_code
 				and b.cn_name='{$cn_name}'
 		";
-
 		
 		$data = Yii::app ()->m_db->createCommand ( $sql )->queryAll ();
 		$data = json_encode ( $data );
-
 	}
-   
 }
 
 ?>

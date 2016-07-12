@@ -2,30 +2,26 @@
 header ( "content-type:text/html;charset=utf-8" );
 class DataController extends Controller {
 	public static $flag = TRUE;
-
-	 /*
-	 *数据注入过滤
-	 */public function  mytrim()
-   {
-   	
-   	   foreach ($_POST as $key => $value) {
-   	   	$_POST[$key]=trim($value);//去空格
-   	   	$_POST[$key]=htmlspecialchars($_POST[$key]);//专义html,js代码,防止前端代码注入
-   	   	$$_POST[$key]=addslashes($_POST[$key]);//  过滤大部分的sql注入
-   	   	
-   	   }
-   	   
-   	   foreach ($_GET as $key => $value) {
-   	
-   	    $_GET[$key]=trim($value);//去空格
-   	   	$_GET[$key]=htmlspecialchars($_GET[$key]);//专义html,js代码,防止前端代码注入
-   	   	$_GET[$key]=addslashes($_GET[$key]);//  过滤大部分的sql注入
-   	   
-   	   }
-   	
-   }
+	
+	/*
+	 * 数据注入过滤
+	 */
+	public function mytrim() {
+		foreach ( $_POST as $key => $value ) {
+			$_POST [$key] = trim ( $value ); // 去空格
+			$_POST [$key] = htmlspecialchars ( $_POST [$key] ); // 专义html,js代码,防止前端代码注入
+			$$_POST [$key] = addslashes ( $_POST [$key] ); // 过滤大部分的sql注入
+		}
+		
+		foreach ( $_GET as $key => $value ) {
+			
+			$_GET [$key] = trim ( $value ); // 去空格
+			$_GET [$key] = htmlspecialchars ( $_GET [$key] ); // 专义html,js代码,防止前端代码注入
+			$_GET [$key] = addslashes ( $_GET [$key] ); // 过滤大部分的sql注入
+		}
+	}
 	public function actionData_Material() {
-		$this->mytrim();
+		$this->mytrim ();
 		$table_type = (isset ( $_GET ['table_type'] )) ? $_GET ['table_type'] : '1';
 		
 		switch ($table_type) {
@@ -289,28 +285,13 @@ class DataController extends Controller {
 		// exit ();
 	}
 	public function actionData_Material_certificate_edit() {
-       
-
-       $this->mytrim();
-
+		$this->mytrim ();
+		
 		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
 		$certificate_code = (isset ( $_POST ['certificate_code'] )) ? $_POST ['certificate_code'] : FALSE;
 		$certificate_type = (isset ( $_POST ['certificate_type'] )) ? $_POST ['certificate_type'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
 		
-        
-
-
-
-
-
-		
-
-
-
-
-
-
 		$certificate = certificate::model ()->findByPk ( $id );
 		$certificate->certificate_id = $id;
 		$certificate->certificate_code = $certificate_code;
@@ -325,8 +306,7 @@ class DataController extends Controller {
 		}
 	}
 	public function actionData_Material_certificate_add() {
-
-		$this->mytrim();
+		$this->mytrim ();
 		$certificate_code = (isset ( $_POST ['certificate_code'] )) ? $_POST ['certificate_code'] : FALSE;
 		$certificate_type = (isset ( $_POST ['certificate_type'] )) ? $_POST ['certificate_type'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
@@ -344,7 +324,7 @@ class DataController extends Controller {
 		}
 	}
 	public function actionData_Material_title_add() {
-		$this->mytrim();
+		$this->mytrim ();
 		$title_code = (isset ( $_POST ['title_code'] )) ? $_POST ['title_code'] : FALSE;
 		$title_name = (isset ( $_POST ['title_name'] )) ? $_POST ['title_name'] : FALSE;
 		$title_level = (isset ( $_POST ['title_level'] )) ? $_POST ['title_level'] : FALSE;
@@ -365,8 +345,7 @@ class DataController extends Controller {
 		}
 	}
 	public function actionData_Material_title_edit() {
-
-		$this->mytrim();
+		$this->mytrim ();
 		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
 		$title_code = (isset ( $_POST ['title_code'] )) ? $_POST ['title_code'] : FALSE;
 		$title_name = (isset ( $_POST ['title_name'] )) ? $_POST ['title_name'] : FALSE;
@@ -388,7 +367,7 @@ class DataController extends Controller {
 		}
 	}
 	public function actionData_Material_train_add() {
-		$this->mytrim();
+		$this->mytrim ();
 		$train_code = (isset ( $_POST ['train_code'] )) ? $_POST ['train_code'] : FALSE;
 		$train_name = (isset ( $_POST ['train_name'] )) ? $_POST ['train_name'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
@@ -406,8 +385,7 @@ class DataController extends Controller {
 		}
 	}
 	public function actionData_Material_train_edit() {
-
-		$this->mytrim();
+		$this->mytrim ();
 		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
 		$train_code = (isset ( $_POST ['train_code'] )) ? $_POST ['train_code'] : FALSE;
 		$train_name = (isset ( $_POST ['train_name'] )) ? $_POST ['train_name'] : FALSE;
@@ -426,8 +404,7 @@ class DataController extends Controller {
 		}
 	}
 	public function actionData_Material_welfare_edit() {
-
-		$this->mytrim();
+		$this->mytrim ();
 		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
 		$welfare_code = (isset ( $_POST ['welfare_code'] )) ? $_POST ['welfare_code'] : FALSE;
 		$welfare_name = (isset ( $_POST ['welfare_name'] )) ? $_POST ['welfare_name'] : FALSE;
@@ -448,8 +425,7 @@ class DataController extends Controller {
 		}
 	}
 	public function actionData_Material_welfare_add() {
-
-		$this->mytrim();
+		$this->mytrim ();
 		$welfare_code = (isset ( $_POST ['welfare_code'] )) ? $_POST ['welfare_code'] : FALSE;
 		$welfare_name = (isset ( $_POST ['welfare_name'] )) ? $_POST ['welfare_name'] : FALSE;
 		$welfare_status = (isset ( $_POST ['welfare_status'] )) ? $_POST ['welfare_status'] : FALSE;
@@ -512,7 +488,7 @@ class DataController extends Controller {
 		return $post;
 	}
 	public function actionData_Post() {
-		$this->mytrim();
+		$this->mytrim ();
 		
 		// 多条删除
 		if ($_POST) {
@@ -579,8 +555,7 @@ class DataController extends Controller {
 		) );
 	}
 	public function actionData_Log() {
-
-		$this->mytrim();
+		$this->mytrim ();
 		$operation_time = '';
 		$operation_type = '';
 		$operation_module = '';
@@ -592,10 +567,7 @@ class DataController extends Controller {
 			$operation_module = (isset ( $_POST ['operation_module'] )) ? trim ( $_POST ['operation_module'] ) : '';
 			$Operator = (isset ( $_POST ['Operator'] )) ? trim ( $_POST ['Operator'] ) : '';
 		}
-
-    
-
-
+		
 		$Searchdata = array ();
 		$Searchdata ['operation_time'] = $operation_time;
 		$Searchdata ['operation_type'] = $operation_type;
@@ -610,8 +582,8 @@ class DataController extends Controller {
 		$pager->pageSize = 1; // 每页多少条记录
 		$pager->applyLimit ( $criteria ); // 进行limit截取
 		$sql = "SELECT a.cn_name, b.* FROM vcos_employee as a ,vcos_log_management as b WHERE a.employee_code=b.employee_code AND b.operation_module LIKE '%{$operation_module}%' AND b.operation_time LIKE '%{$operation_time}%' AND b.operation_type LIKE '%{$operation_type}%' AND a.cn_name like'%{$Operator}%' ";
-
-		$sql=$sql."LIMIT {$criteria->offset}, {$pager->pageSize}";
+		
+		$sql = $sql . "LIMIT {$criteria->offset}, {$pager->pageSize}";
 		
 		$log = Yii::app ()->m_db->createCommand ( $sql )->queryAll ();
 		// var_dump ( $log );
@@ -622,15 +594,11 @@ class DataController extends Controller {
 		) );
 	}
 	public function actionData_post_add() {
-
-		$this->mytrim();
+		$this->mytrim ();
 		$department_id = (isset ( $_POST ['department_id'] )) ? $_POST ['department_id'] : FALSE;
 		$post_cn_name = (isset ( $_POST ['post_cn_name'] )) ? $_POST ['post_cn_name'] : FALSE;
 		$post_en_name = (isset ( $_POST ['post_en_name'] )) ? $_POST ['post_en_name'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
-
-
-
 		
 		$post = new post ();
 		$post->department_id = $department_id;
@@ -646,48 +614,34 @@ class DataController extends Controller {
 		}
 	}
 	public function actionData_post_edit() {
-
-
-		$this->mytrim();
+		$this->mytrim ();
 		$id = (isset ( $_GET ['id'] )) ? $_GET ['id'] : FALSE;
 		$department_id = (isset ( $_POST ['department_id'] )) ? $_POST ['department_id'] : FALSE;
 		$post_cn_name = (isset ( $_POST ['post_cn_name'] )) ? $_POST ['post_cn_name'] : FALSE;
 		$post_en_name = (isset ( $_POST ['post_en_name'] )) ? $_POST ['post_en_name'] : FALSE;
 		$remark = (isset ( $_POST ['remark'] )) ? $_POST ['remark'] : FALSE;
-
-
-
-	    // 去掉空格
-	    // $id=trim($id);
-	    // $department_id=trim($department_id);
-	    // $post_cn_name=trim($post_cn_name);
-	    // $post_en_name=trim($post_en_name);
-	    // $remark=trim($remark);
-
-
-
-		//专义，防止js注入
+		
+		// 去掉空格
+		// $id=trim($id);
+		// $department_id=trim($department_id);
+		// $post_cn_name=trim($post_cn_name);
+		// $post_en_name=trim($post_en_name);
+		// $remark=trim($remark);
+		
+		// 专义，防止js注入
 		// $id=htmlspecialchars($id);
-	 //    $department_id=htmlspecialchars($department_id);
-  //       $post_en_name=htmlspecialchars($post_en_name);
-  //       $post_cn_name=htmlspecialchars($post_cn_name);
+		// $department_id=htmlspecialchars($department_id);
+		// $post_en_name=htmlspecialchars($post_en_name);
+		// $post_cn_name=htmlspecialchars($post_cn_name);
 		// $remark=htmlspecialchars($remark);
-
-
-		//过滤大部分的sql注入
-
+		
+		// 过滤大部分的sql注入
+		
 		// $id=addslashes($id);
-	 //    $department_id=addslashes($department_id);
-  //       $post_en_name=addslashes($post_en_name);
-  //       $post_cn_name=addslashes($post_cn_name);
+		// $department_id=addslashes($department_id);
+		// $post_en_name=addslashes($post_en_name);
+		// $post_cn_name=addslashes($post_cn_name);
 		// $remark=addslashes($remark);
-
-
-
-
-	
-
-
 		
 		$post = post::model ()->findByPk ( $id );
 		$post->post_id = $id;
@@ -695,7 +649,7 @@ class DataController extends Controller {
 		$post->post_en_name = $post_en_name;
 		$post->remark = $remark;
 		$post->department_id = $department_id;
-		$count = $post->save();
+		$count = $post->save ();
 		if ($count > 0) {
 			Helper::show_message ( yii::t ( 'vcos', '修改成功。' ), Yii::app ()->createUrl ( "data/data_post" ) );
 		} else {
@@ -735,7 +689,7 @@ class DataController extends Controller {
 		echo $a;
 	}
 	public function actionData_Log_export() {
-		$this->mytrim();
+		$this->mytrim ();
 		$operation_time = '';
 		$operation_type = '';
 		$operation_module = '';
@@ -748,13 +702,11 @@ class DataController extends Controller {
 			$Operator = (isset ( $_POST ['Operator'] )) ? trim ( $_POST ['Operator'] ) : '';
 		}
 		
-		$logexport = new export();
+		$logexport = new export ();
 		$logexport->log_export ( $Operator, $operation_time, $operation_type, $operation_module );
 	}
-	
-	
 	public function actionData_structure_getbumen_allpost() {
-		$this->mytrim();
+		$this->mytrim ();
 		$department_id = isset ( $_POST ['department_id'] ) ? $_POST ['department_id'] : '3';
 		
 		$Data = array ();
@@ -812,7 +764,7 @@ class DataController extends Controller {
 		echo $data;
 	}
 	public function actionData_structure_add() {
-		$this->mytrim();
+		$this->mytrim ();
 		$department_name = (isset ( $_POST ['department_name'] )) ? $_POST ['department_name'] : '';
 		$is_parentment = (isset ( $_POST ['is_parentment'] )) ? $_POST ['is_parentment'] : '';
 		$parent_department_id = (isset ( $_POST ['parent_department_id'] )) ? $_POST ['parent_department_id'] : '';
