@@ -15,7 +15,7 @@ class AllocateController extends Controller
 		
 			$seletedata=new seletedata();
 			$data=$seletedata->paging($sql, $count_sql, $page, $t);
-			$this->render("allocate",$data);
+			$this->render("allocate",array('data'=>$data));
 		}
 		/* elseif ($t==1){
 			$shipinfo=ship::model()->findAll();
@@ -35,7 +35,10 @@ class AllocateController extends Controller
 			$this->render("allocate",$data);
 		} */
 		else{
-			$this->render("allocate",array('page'=>1,'count'=>1,'t'=>$t));
+			$data['page'] = 1;
+			$data['count'] = 1;
+			$data['t'] = $t;
+			$this->render("allocate",array('data'=>$data));
 		}
 	
 	}

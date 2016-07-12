@@ -55,19 +55,19 @@ a:active {
 				<div class="col-sm-6" style="width:100%">
 										<div class="tabbable">
 											<ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">												
-												<li <?php echo $t==0?"class='active'":''?>>
+												<li <?php echo $data['t']==0?"class='active'":''?>>
 													<a href="allocate_allocate?t=0">船员预调配</a>
 												</li>
-                                                <li <?php echo $t==1?"class='active'":''?>>
+                                                <li <?php echo $data['t']==1?"class='active'":''?>>
 													<a href="allocate_allocate?t=1">船员调配确认</a>
 												</li>
-												  <li <?php echo $t==2?"class='active'":''?>>
+												  <li <?php echo $data['t']==2?"class='active'":''?>>
 													<a href="allocate_allocate?t=2">船员调配查询</a>
 												</li>
 											</ul>
 											<div class="tab-content">				
 												<!-- 第一个div -->
-												<div id="inputresult" <?php echo $t==0?"class='tab-pane in active'":"class='tab-pane'" ?> style="height:2000px">
+												<div id="inputresult" <?php echo $data['t']==0?"class='tab-pane in active'":"class='tab-pane'" ?> style="height:2000px">
 																<!-- 标题 -->
 																<div class="page-header">
 			                                    <h1> 
@@ -79,7 +79,7 @@ a:active {
 			                                    </h1>
 			                            </div><!-- /.page-header -->
 												 <form id='member_list' class="form-horizontal" method="post" action="<?php echo Yii::app()->createUrl("Allocate/allocate_allocate");?>" autocomplete="off" >
-										 			<input type='hidden' name='page' value="<?php echo $page;?>">
+										 			<input type='hidden' name='page' value="<?php echo $data['page'];?>">
                                                        <input type='hidden' name='isPage' value="1">
 												<div class="col-xs-12">
 										<div class="table-responsive">
@@ -105,8 +105,8 @@ a:active {
 												</thead>
 
 												<tbody>
-												<?php if ($t==0){?>
-													<?php foreach ($posts as $k=>$v):?>
+												<?php if ($data['t']==0){?>
+													<?php foreach ($data['posts'] as $k=>$v):?>
 													
 													<tr>
 													
@@ -167,7 +167,7 @@ a:active {
 									
 					
 													<!-- 离职档案 -->
-													<div id="protectresult" <?php echo $t==1?"class='tab-pane in active'":"class='tab-pane'" ?> style="height:2000px">
+													<div id="protectresult" <?php echo $data['t']==1?"class='tab-pane in active'":"class='tab-pane'" ?> style="height:2000px">
 														<!-- 标题 -->
 																<div class="page-header">
 			                                    <h1> 
@@ -180,7 +180,7 @@ a:active {
 			                            </div><!-- /.page-header -->
 													
 													 <form id='member_list1' class="form-horizontal" method="post" action="<?php echo Yii::app()->createUrl("Allocate/allocate_allocate");?>" autocomplete="off" >
-										 			<input type='hidden' name='page' value="<?php echo $page;?>">
+										 			<input type='hidden' name='page' value="<?php echo $data['page'];?>">
                                                        <input type='hidden' name='isPage' value="1">
 														
 												
@@ -360,7 +360,7 @@ a:active {
 													
 												
 	<!-- 第二个div -->
-		<div id="selectresult" <?php echo $t==2?"class='tab-pane in active'":"class='tab-pane'" ?> style="height:2000px">
+		<div id="selectresult" <?php echo $data['t']==2?"class='tab-pane in active'":"class='tab-pane'" ?> style="height:2000px">
 			<!-- 标题 -->
 																<div class="page-header">
 			                                    <h1> 
@@ -373,7 +373,7 @@ a:active {
 			                            </div><!-- /.page-header -->
 		<!-- --------------------------------------------- -->
 			 <form id='member_list2' class="form-horizontal" method="post" action="<?php echo Yii::app()->createUrl("Allocate/allocate_allocate");?>" autocomplete="off" >
-										 			<input type='hidden' name='page' value="<?php echo $page;?>">
+										 			<input type='hidden' name='page' value="<?php echo $data['page'];?>">
                                                        <input type='hidden' name='isPage' value="1">
 			<table width="755">
   <tr>
@@ -568,9 +568,9 @@ a:active {
 										
 									
 										//分页
-									     var page = <?php echo $page;?>;
+									     var page = <?php echo $data['page'];?>;
 									        $('#page_div').jqPaginator({
-									            totalPages: <?php echo $count;?>,
+									            totalPages: <?php echo $data['count'];?>,
 									            visiblePages: 5,
 									            currentPage: page,
 									            wrapper:'<ul class="pagination"></ul>',
@@ -590,9 +590,9 @@ a:active {
 									            }
 									        });
 									      //分页
-										     var page = <?php echo $page;?>;
+										     var page = <?php echo $data['page'];?>;
 										        $('#page_div1').jqPaginator({
-										            totalPages: <?php echo $count;?>,
+										            totalPages: <?php echo $data['count'];?>,
 										            visiblePages: 5,
 										            currentPage: page,
 										            wrapper:'<ul class="pagination"></ul>',
@@ -613,9 +613,9 @@ a:active {
 										        });
 
 										        //分页
-											     var page = <?php echo $page;?>;
+											     var page = <?php echo $data['page'];?>;
 											        $('#page_div2').jqPaginator({
-											            totalPages: <?php echo $count;?>,
+											            totalPages: <?php echo $data['count'];?>,
 											            visiblePages: 5,
 											            currentPage: page,
 											            wrapper:'<ul class="pagination"></ul>',
@@ -635,9 +635,9 @@ a:active {
 											            }
 											        });
 											        //分页
-												     var page = <?php echo $page;?>;
+												     var page = <?php echo $data['page'];?>;
 												        $('#page_div4').jqPaginator({
-												            totalPages: <?php echo $count;?>,
+												            totalPages: <?php echo $data['count'];?>,
 												            visiblePages: 5,
 												            currentPage: page,
 												            wrapper:'<ul class="pagination"></ul>',
