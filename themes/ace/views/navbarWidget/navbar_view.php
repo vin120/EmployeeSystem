@@ -62,10 +62,10 @@
                     return artDialog(config);
                 };
                 <?php if(in_array('126',$auth) || $auth[0] == '0'){?>
-//                 iTime=setTimeout('getchecklsbooking()',60000);
+                iTime=setTimeout('getchecklsbooking()',60000);
                 <?php } ?>
                 <?php if(in_array('129',$auth) || $auth[0] == '0'){?>
-//                 iTime=setTimeout('getcheckgoodsorder()',50000);
+                iTime=setTimeout('getcheckgoodsorder()',50000);
                 <?php } ?>
             });
             <?php if(in_array('126',$auth) || $auth[0] == '0'){?>

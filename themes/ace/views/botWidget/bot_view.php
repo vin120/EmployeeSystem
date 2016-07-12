@@ -1,5 +1,5 @@
 <?php if($candelete){?>
-<button class="btn btn-xs btn-warning" id="submit">
+<button class="btn btn-xs btn-warning" id="submit1">
     <i class="icon-trash bigger-125"></i>
     <span class="bigger-110 no-text-shadow"><?php echo yii::t('vcos', '删除选中')?></span>
 </button>

@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Booking system',
+	'name'=>'Guest service system',
 	'language' => 'zh_cn',
 	'theme' => 'ace',
 	'timezone' => 'Asia/ShangHai',
@@ -20,6 +20,7 @@ return array(
 		'application.models.*',
 		'application.components.*',
 		'application.widget.*',
+		'application.extensions.*',
 		'application.extensions.mailer.*',
 		'application.extensions.phpexcel.*',
 	),
@@ -116,5 +117,13 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'webmaster@example.com',
+		'img_ueditor_old_js' =>'/\/ueditor/g',
+		'img_ueditor_old' => '/\/ueditor/',
+		'img_ueditor_php' => '/\/test\/wap|http:\/\/www.wap_backend.com/',
+		'img_ueditor' =>'http://www.wap_backend.com/test/wap/ueditor',
+		'img_save_url'=>'../wap/images/',
+		'month'=>date('Ym',time()),
+		'language'=>'zh_cn',
+		'cruise_id'=>'1',
 	),
 );
